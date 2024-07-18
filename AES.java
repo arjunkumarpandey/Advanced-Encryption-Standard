@@ -9,6 +9,7 @@ public class AES {
     private static final int KEY_SIZE = 128;
     private static final int T_LEN = 128;
     private Cipher encryptionCipher;
+    private byte[] iv;
 
     // This method will create the encryption key
     public void init() throws Exception {
@@ -51,6 +52,12 @@ public class AES {
         return Base64.getDecoder().decode(data);
     }
 
+    //Get your secret key and IV
+    private void exportKeys(){
+        System.out.println("SecretKey: "+encode(key.getEncoded()));
+        System.out.println("IV: "+encode(iv));
+    }
+
     public static void main(String[] args) {
         try {
             AES aes = new AES();
@@ -60,6 +67,9 @@ public class AES {
 
             System.out.println("Encrypted message: " + encryptedMessage);
             System.out.println("Decrypted message: " + decryptedMessage);
+
+            //Calling exportKey method
+            aes.exportKeys();
         } catch (Exception e) {
             e.printStackTrace();
         }
